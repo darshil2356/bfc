@@ -1,68 +1,80 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+
 
 const menu = [
   {
     title: "About Us",
+    path: "/about",
     children: [
-      "History",
-      "Objectives Of LIC",
-      "Mission/Vision",
-      "Who’s who",
-      "Operations",
-      "Know About Your Life Insurance",
-      "Help us to serve you better",
-      "Information Technology and LIC",
-      "Awards",
-      "Archives Awards and Achievements",
+      { label: "History", path: "/about/history" },
+      { label: "Objectives Of LIC", path: "/about/objectives" },
+      { label: "Mission/Vision", path: "/about/mission" },
+      { label: "Who’s who", path: "/about/whos-who" },
+      { label: "Operations", path: "/about/operations" },
+      { label: "Know About Your Life Insurance", path: "/about/know-about-your-policy" },
+      { label: "Help us to serve you better", path: "/about/help" },
+      { label: "Information Technology and LIC", path: "/about/it" },
+      { label: "Awards", path: "/about/awards" },
+      { label: "Archives Awards and Achievements", path: "/about/archives-awards" },
     ],
   },
   {
     title: "Products",
+    path: "/products",
     children: [
-      "Insurance Plans",
-      "Endowment Plans",
-      "Whole Life Plans",
-      "Money Back Plans",
-      "Term Assurance Plans",
-      "Riders",
-      "Pension Plans",
-      "Unit Linked Plans",
-      "Micro Insurance Plans",
-      "Withdrawn Plans",
+      { label: "Insurance Plans", path: "/products/insurance-plans" },
+      { label: "Endowment Plans", path: "/products/endowment-plans" },
+      { label: "Whole Life Plans", path: "/products/whole-life-plans" },
+      { label: "Money Back Plans", path: "/products/money-back-plans" },
+      { label: "Term Assurance Plans", path: "/products/term-assurance-plans" },
+      { label: "Riders", path: "/products/riders" },
+      { label: "Pension Plans", path: "/products/pension-plans" },
+      { label: "Unit Linked Plans", path: "/products/unit-linked-plans" },
+      { label: "Micro Insurance Plans", path: "/products/micro-insurance-plans" },
+      { label: "Withdrawn Plans", path: "/products/withdrawn-plans" },
     ],
   },
   {
     title: "Group Business",
+    path: "/group-business",
     children: [
-      "Contact for Group Insurance Scheme",
-      "Group Customer/Annuitant Login",
-      "87A Declaration for Group Annuity",
-      "Pension & Group Schemes New Product",
-      "Pension & Group Schemes Withdrawn Products",
-      "Gratuity Plus NAV",
+      { label: "Contact for Group Insurance Scheme", path: "/group-business/contact" },
+      { label: "Group Customer/Annuitant Login", path: "/group-business/customer-login" },
+      { label: "87A Declaration for Group Annuity", path: "/group-business/87a-declaration" },
+      { label: "Pension & Group Schemes New Product", path: "/group-business/new-product" },
+      { label: "Pension & Group Schemes Withdrawn Products", path: "/group-business/withdrawn-products" },
+      { label: "Gratuity Plus NAV", path: "/group-business/gratuity-plus-nav" },
     ],
   },
   {
     title: "Customer Services",
+    path: "/customer-services",
     children: [
-      "Customer Corner",
-      "Claims settlement requirements",
-      "Spurious Calls",
-      "Update Your Contact details - Offline",
-      "Unclaimed Amounts of Policyholders",
-      "Bonus Information",
-      "Policy Status",
-      "NRI Center",
-      "Phone Help Line",
-      "Insurance Selector",
-      "Policy Guidelines & Helpline",
-      "Tax Benefit",
+      { label: "Customer Corner", path: "/customer-services/customer-corner" },
+      { label: "Claims settlement requirements", path: "/customer-services/claims-settlement" },
+      { label: "Spurious Calls", path: "/customer-services/spurious-calls" },
+      { label: "Update Your Contact details - Offline", path: "/customer-services/update-contact" },
+      { label: "Unclaimed Amounts of Policyholders", path: "/customer-services/unclaimed-amounts" },
+      { label: "Bonus Information", path: "/customer-services/bonus-information" },
+      { label: "Policy Status", path: "/customer-services/policy-status" },
+      { label: "NRI Center", path: "/customer-services/nri-center" },
+      { label: "Phone Help Line", path: "/customer-services/phone-help-line" },
+      { label: "Insurance Selector", path: "/customer-services/insurance-selector" },
+      { label: "Policy Guidelines & Helpline", path: "/customer-services/policy-guidelines" },
+      { label: "Tax Benefit", path: "/customer-services/tax-benefit" },
     ],
   },
   {
     title: "NRI",
-    children: ["NRI Centre", "NRI Customers", "QuickPay-Premium", "FATCA/CRS"],
+    path: "/nri",
+    children: [
+      { label: "NRI Centre", path: "/nri/centre" },
+      { label: "NRI Customers", path: "/nri/customers" },
+      { label: "QuickPay-Premium", path: "/nri/quickpay" },
+      { label: "FATCA/CRS", path: "/nri/fatca-crs" },
+    ],
   },
 ];
 
@@ -103,39 +115,49 @@ const Header = () => {
           </div>
 
           {/* Desktop Menu */}
-          {/* Desktop Menu */}
+{/* Desktop Menu */}
 <nav className="hidden lg:flex items-center gap-6 relative">
   {menu.map((item, i) => (
     <div
       key={i}
       className="relative"
-      onMouseEnter={() => clickedIndex === null && setOpenIndex(i)}
-      onMouseLeave={() => clickedIndex === null && setOpenIndex(null)}
+      onMouseEnter={() => setOpenIndex(i)}     // open dropdown on hover
     >
-      <button
+      <Link
+        to={item.path ?? "#"}
         className="text-gray-800 flex items-center gap-1 text-sm font-medium hover:text-teal-600 transition"
         onClick={(e) => {
-          e.stopPropagation(); // prevent closing instantly
-          setClickedIndex(clickedIndex === i ? null : i);
-          setOpenIndex(i);
+          e.stopPropagation(); // prevent closing when clicking inside
+          setOpenIndex(i); // ensure current dropdown stays open
         }}
       >
-        <i className={`${item.icon} text-base`}></i> {item.title}
+        {item.title}
         <i className="fi fi-rr-angle-small-down text-xs"></i>
-      </button>
+      </Link>
 
-      {(openIndex === i) && (
-        <div className="absolute left-0 bg-white shadow-lg border rounded-md mt-2 w-56 z-50">
+      {/* Dropdown */}
+      {openIndex === i && (
+        <div
+          className="absolute left-0 bg-white shadow-lg border rounded-md mt-2 w-56 z-50"
+          onMouseEnter={() => setOpenIndex(i)} // keep open when hovering dropdown
+          onMouseLeave={() => {}} // do nothing here, let click outside handle close
+        >
           {item.children.map((c, idx) => (
-            <a key={idx} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
-              {c}
-            </a>
+            <Link
+              to={c.path}
+              key={idx}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer"
+              onClick={() => setOpenIndex(null)} // close on click inside item
+            >
+              {c.label}
+            </Link>
           ))}
         </div>
       )}
     </div>
   ))}
 </nav>
+
 
 
           {/* Desktop Buttons */}

@@ -23,14 +23,14 @@ export default function Carousel() {
     setIndex((prev) => (prev - 1 + images.length) % images.length);
 
   return (
-    <div className="relative w-full overflow-hidden bg-black">
+    <div className="relative w-full  overflow-hidden bg-black">
       {/* Slides */}
       <div
         className="flex transition-transform duration-700"
         style={{ transform: `translateX(-${index * 100}%)` }}
       >
         {images.map((src, i) => (
-          <div key={i} className="w-full flex-shrink-0  flex items-center justify-center bg-black">
+          <div key={i} className="w-full  flex-shrink-0  flex items-center justify-center bg-black">
             <img
               src={src}
               className="w-full h-full object-fill"

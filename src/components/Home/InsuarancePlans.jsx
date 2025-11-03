@@ -111,11 +111,11 @@ const InsurancePlans = () => {
 
         {/* Mobile Carousel (visible only on <768px) */}
 {/* Mobile Carousel (visible only on <768px) */}
-<div className="md:hidden overflow-x-auto flex gap-4 snap-x scroll-smooth pb-4 -mx-4 px-4">
+<div className="md:hidden overflow-x-auto  flex gap-4 snap-x scroll-smooth pb-4 -mx-4 px-4">
   {plans.map((plan, index) => (
     <div
       key={index}
-      className="min-w-[80%] bg-gray-50 border border-gray-200 rounded-xl snap-center flex-shrink-0 overflow-hidden hover:shadow-lg transition-shadow duration-300"
+      className="max-w-[500px] bg-gray-50 border border-gray-200 rounded-xl snap-center flex-shrink-0 overflow-hidden hover:shadow-lg transition-shadow duration-300"
     >
       <div className="p-6 flex flex-col h-full justify-between">
         <div>
