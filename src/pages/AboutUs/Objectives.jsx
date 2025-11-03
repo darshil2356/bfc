@@ -6,9 +6,7 @@ import Footer from '../../components/Footer/Footer'
 const Objectives = () => {
   return (
     <div>
-        <Header />
         <ObjectivesOfLIC />
-        <Footer />
     </div>
   )
 }

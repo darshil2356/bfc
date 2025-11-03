@@ -11,14 +11,12 @@ import CalculatorSection from "../components/Home/CalculatorSection";
 function HomePage() {
   return (
     <div>
-      <Header />
       <Carousel />
       <SelectionBar />
       <InsurancePlans />
       <SearchByCategory />
       {/* <WhyLIC /> */}
       <CalculatorSection />
-      <Footer />
     </div>
   );
 }

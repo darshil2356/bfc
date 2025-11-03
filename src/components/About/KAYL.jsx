@@ -31,7 +31,7 @@ const AboutLifeInsurance = ({
           {/* Yellow Left Border + Content */}
           <div className="p-6 sm:p-8 lg:p-12">
             {/* Title */}
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-700 mb-6 border-l-4 border-yellow-400 ">
+            <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-700 mb-6 border-l-4 border-yellow-400 ">
               {pageTitle}
             </h1>
 
